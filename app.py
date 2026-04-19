@@ -208,14 +208,16 @@ footer { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
 
-MODEL_DIR = 'ola_churn_model'
+# Get the directory where this script is located
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_DIR = os.path.join(SCRIPT_DIR, 'ola_churn_model')
 
 @st.cache_resource
 def load_artifacts():
-    model     = joblib.load(f'{MODEL_DIR}/ola_churn_xgb.pkl')
-    le        = joblib.load(f'{MODEL_DIR}/label_encoder.pkl')
-    caps      = joblib.load(f'{MODEL_DIR}/outlier_caps.pkl')
-    feat_cols = joblib.load(f'{MODEL_DIR}/feature_columns.pkl')
+    model     = joblib.load(os.path.join(MODEL_DIR, 'ola_churn_xgb.pkl'))
+    le        = joblib.load(os.path.join(MODEL_DIR, 'label_encoder.pkl'))
+    caps      = joblib.load(os.path.join(MODEL_DIR, 'outlier_caps.pkl'))
+    feat_cols = joblib.load(os.path.join(MODEL_DIR, 'feature_columns.pkl'))
     return model, le, caps, feat_cols
 
 def predict_churn(input_df, model, le, caps, feat_cols):

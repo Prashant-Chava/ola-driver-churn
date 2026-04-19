@@ -1,0 +1,22 @@
+# Streamlit deployment ignore file
+.git/
+.gitignore
+.github/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+*.ipynb
+.DS_Store
+*.log
+.pytest_cache/
+.idea/
+.vscode/
+*.csv
+*.xlsx
+data/
+.streamlit/secrets.toml
