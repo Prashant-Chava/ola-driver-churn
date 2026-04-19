@@ -228,7 +228,8 @@ def predict_churn(input_df, model, le, caps, feat_cols):
             lambda x: le.transform([x])[0] if x in known else 0
         )
     df = df.reindex(columns=feat_cols, fill_value=0)
-    df = df.astype(float)
+    # Safely convert all columns to numeric, handling any remaining non-numeric values
+    df = df.apply(pd.to_numeric, errors='coerce').fillna(0)
     prob = model.predict_proba(df)[:, 1][0]
     return round(float(prob), 4)
 
