@@ -1,6 +1,6 @@
 # Ola Driver Churn Prediction
 
-**Live Demo:** https://ola-driver-churn-prediction.streamlit.app/ 
+**Live Demo:** https://ola-driver-churn-prediction.streamlit.app/  
 **Model AUC-ROC:** 0.93  
 **Tech Stack:** Python · XGBoost · SMOTE · scikit-learn · Streamlit
 
