@@ -1,6 +1,6 @@
 # Ola Driver Churn Prediction
 
-**Live Demo:** [your-app.streamlit.app](https://your-app.streamlit.app)  
+**Live Demo:** https://ola-driver-churn-prediction.streamlit.app/ 
 **Model AUC-ROC:** 0.93  
 **Tech Stack:** Python · XGBoost · SMOTE · scikit-learn · Streamlit
 
@@ -54,12 +54,8 @@ ola-driver-churn/
 ## How to Run Locally
 
 ```bash
-git clone https://github.com/yourusername/ola-driver-churn
+git clone https://github.com/Prashant-Chavan/ola-driver-churn
 cd ola-driver-churn
 pip install -r requirements.txt
 streamlit run app.py
 ```
-
-## Deployment
-
-Deployed on Streamlit Cloud — connect your GitHub repo at [share.streamlit.io](https://share.streamlit.io)
