@@ -13,74 +13,101 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sora:wght@400;600&display=swap');
 
-* { font-family: 'DM Sans', sans-serif; }
-html, body, [data-testid="stAppViewContainer"] { background: #0D0D0D; color: #F0EDE8; }
-[data-testid="stAppViewContainer"] { background: #0D0D0D; }
+* { font-family: 'Poppins', sans-serif; }
+html, body, [data-testid="stAppViewContainer"] { background: linear-gradient(135deg, #FAFBFC 0%, #F3F5F7 100%); color: #0F1419; }
+[data-testid="stAppViewContainer"] { background: linear-gradient(135deg, #FAFBFC 0%, #F3F5F7 100%); }
 [data-testid="stHeader"] { background: transparent; }
-h1,h2,h3 { font-family: 'DM Serif Display', serif; color: #F0EDE8; }
+[data-testid="stSidebar"] { background: #FFFFFF; }
+h1,h2,h3 { font-family: 'Sora', sans-serif; color: #0F1419; font-weight:700; }
 
-.hero-title { font-family:'DM Serif Display',serif; font-size:3rem; line-height:1.1; color:#F0EDE8; margin:0; }
-.hero-sub   { font-size:0.95rem; color:#666; font-weight:300; letter-spacing:0.04em; margin-top:8px; }
-.accent     { color:#FF5733; }
+.hero-title { font-family:'Sora',sans-serif; font-size:3.6rem; line-height:1.1; color:#0F1419; margin:0; font-weight:700; }
+.accent { background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
 .section-label {
-    font-size:0.7rem; font-weight:600; letter-spacing:0.12em;
-    text-transform:uppercase; color:#555; margin-bottom:16px;
+    font-size:0.7rem; font-weight:600; letter-spacing:0.13em;
+    text-transform:uppercase; color:#7F8C9A; margin-bottom:16px;
 }
 
-.result-card { border-radius:16px; padding:32px; text-align:center; margin-bottom:16px; }
-.result-high   { background:linear-gradient(135deg,#2A0A0A,#1A0505); border:1px solid #FF3B3B44; }
-.result-medium { background:linear-gradient(135deg,#1A1200,#120E00); border:1px solid #FF990044; }
-.result-low    { background:linear-gradient(135deg,#001A0D,#00120A); border:1px solid #00CC6644; }
+.card-section { background:#FFFFFF; border-radius:16px; padding:28px; box-shadow:0 4px 12px rgba(0,0,0,0.08); margin-bottom:20px; }
 
-.result-prob { font-family:'DM Serif Display',serif; font-size:4rem; line-height:1; margin:0; }
-.result-high   .result-prob { color:#FF4444; }
-.result-medium .result-prob { color:#FFAA00; }
-.result-low    .result-prob { color:#00CC66; }
+.input-group-title { font-size:0.85rem; font-weight:600; color:#0F1419; margin-bottom:12px; }
 
-.result-label { font-size:0.72rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:4px; }
-.result-high   .result-label { color:#FF4444; }
-.result-medium .result-label { color:#FFAA00; }
-.result-low    .result-label { color:#00CC66; }
+.result-card { border-radius:20px; padding:36px; text-align:center; margin-bottom:20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5); }
+.result-high   { background: linear-gradient(135deg, rgba(229,57,53,0.1) 0%, rgba(229,57,53,0.05) 100%); border: 1px solid rgba(229,57,53,0.3); }
+.result-medium { background: linear-gradient(135deg, rgba(245,124,0,0.1) 0%, rgba(245,124,0,0.05) 100%); border: 1px solid rgba(245,124,0,0.3); }
+.result-low    { background: linear-gradient(135deg, rgba(27,140,90,0.1) 0%, rgba(27,140,90,0.05) 100%); border: 1px solid rgba(27,140,90,0.3); }
 
-.result-desc { font-size:0.88rem; color:#888; font-weight:300; margin-top:8px; line-height:1.5; }
+.result-prob { font-family:'Sora',sans-serif; font-size:4.5rem; line-height:1; margin:0; font-weight:700; }
+.result-high   .result-prob { background: linear-gradient(135deg, #E53935 0%, #C62828 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.result-medium .result-prob { background: linear-gradient(135deg, #F57C00 0%, #E65100 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.result-low    .result-prob { background: linear-gradient(135deg, #1B8C5A 0%, #0D5F3F 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.result-label { font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px; }
+.result-high   .result-label { color:#E53935; }
+.result-medium .result-label { color:#F57C00; }
+.result-low    .result-label { color:#1B8C5A; }
+
+.result-desc { font-size:0.9rem; color:#556B7D; font-weight:400; margin-top:12px; line-height:1.6; }
 
 .insight-pill {
-    display:inline-block; background:#1E1E1E; border:1px solid #2E2E2E;
-    border-radius:100px; padding:5px 12px; font-size:0.76rem; color:#AAA; margin:3px;
+    display:inline-block; background:#FFFFFF; border:1.5px solid #E8EEF5;
+    border-radius:24px; padding:8px 14px; font-size:0.76rem; color:#556B7D; margin:4px; font-weight:500;
+    box-shadow:0 2px 6px rgba(0,0,0,0.06); transition: all 0.2s ease;
 }
+.insight-pill:hover { box-shadow:0 4px 12px rgba(0,0,0,0.1); }
 
-.metric-row { display:flex; gap:10px; margin-top:14px; }
+.metric-row { display:flex; gap:12px; margin-top:20px; }
 .metric-box {
-    flex:1; background:#1A1A1A; border:1px solid #252525;
-    border-radius:12px; padding:14px; text-align:center;
+    flex:1; background:#FFFFFF; border:1.5px solid #E8EEF5;
+    border-radius:14px; padding:20px; text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.05); transition: all 0.3s ease;
 }
-.metric-val { font-family:'DM Serif Display',serif; font-size:1.6rem; color:#F0EDE8; }
-.metric-key { font-size:0.68rem; color:#555; text-transform:uppercase; letter-spacing:0.1em; margin-top:3px; }
+.metric-box:hover { transform: translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,0.1); }
+.metric-val { font-family:'Sora',sans-serif; font-size:1.8rem; color:#0F1419; font-weight:700; }
+.metric-key { font-size:0.68rem; color:#7F8C9A; text-transform:uppercase; letter-spacing:0.11em; margin-top:6px; font-weight:600; }
 
-.divider { height:1px; background:#1A1A1A; margin:20px 0; }
-
-.hint-text { font-size:0.75rem; color:#444; margin-top:4px; font-style:italic; }
+.divider { height:1.5px; background: linear-gradient(90deg, transparent, #E8EEF5 20%, #E8EEF5 80%, transparent); margin:24px 0; }
 
 [data-testid="stSelectbox"] > div > div,
-[data-testid="stNumberInput"] input {
-    background:#1A1A1A !important; border:1px solid #2A2A2A !important;
-    color:#F0EDE8 !important; border-radius:8px !important;
+[data-testid="stNumberInput"] input,
+[data-testid="stNumberInput"] button,
+[data-testid="stSlider"] {
+    background:#FFFFFF !important; 
+    border:1.5px solid #E8EEF5 !important;
+    color:#0F1419 !important; 
+    border-radius:10px !important;
 }
-label { color:#888 !important; font-size:0.8rem !important; }
-.stSlider [data-baseweb="slider"] { color:#FF5733; }
+
+label { 
+    color:#556B7D !important; 
+    font-size:0.82rem !important; 
+    font-weight:500 !important;
+}
 
 .stButton button {
-    width:100%; background:#FF5733 !important; color:white !important;
-    border:none !important; border-radius:12px !important; padding:16px !important;
-    font-size:1rem !important; font-weight:600 !important;
-    letter-spacing:0.04em !important; font-family:'DM Sans',sans-serif !important;
+    width:100% !important; 
+    background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%) !important; 
+    color:white !important;
+    border:none !important; 
+    border-radius:12px !important; 
+    padding:16px !important;
+    font-size:1.02rem !important; 
+    font-weight:600 !important;
+    letter-spacing:0.05em !important; 
+    font-family:'Poppins',sans-serif !important;
+    box-shadow:0 6px 20px rgba(255,107,53,0.35) !important;
+    transition: all 0.3s ease !important;
 }
-.stButton button:hover { background:#E84820 !important; }
+.stButton button:hover { 
+    transform: translateY(-2px) !important;
+    box-shadow:0 10px 28px rgba(255,107,53,0.45) !important; 
+}
+
 footer,#MainMenu { visibility:hidden; }
 </style>
 """, unsafe_allow_html=True)
@@ -142,106 +169,137 @@ except Exception as e:
 
 # ── HERO ──────────────────────────────────────────────
 st.markdown("""
-<div style="padding:36px 0 28px;">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-        <span style="font-size:1.8rem;">🚗</span>
-        <span style="font-size:0.72rem;font-weight:600;letter-spacing:0.14em;
-              text-transform:uppercase;color:#444;">Ola Intelligence</span>
+<div style="padding:48px 0 36px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <span style="font-size:2.2rem;">🚗</span>
+        <span style="font-size:0.74rem;font-weight:700;letter-spacing:0.15em;
+              text-transform:uppercase;color:#7F8C9A;">Ola Intelligence</span>
     </div>
-    <p class="hero-title">Driver Churn<br><span class="accent">Predictor</span></p>
-    <p class="hero-sub">XGBoost · AUC-ROC 0.93 · 3,000+ driver records</p>
+    <h1 class="hero-title">Driver Churn<br><span class="accent">Predictor</span></h1>
+    <p style="font-size:1.02rem;color:#556B7D;margin-top:12px;font-weight:400;">
+        AI-powered prediction to identify high-risk drivers before they churn
+    </p>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
-left, right = st.columns([1.1, 0.9], gap="large")
+left, right = st.columns([1.15, 0.85], gap="large")
 
 with left:
-    st.markdown('<p class="section-label">Driver Profile</p>', unsafe_allow_html=True)
-
-    c1, c2 = st.columns(2)
-    with c1:
-        city = st.selectbox(
-            "City",
-            sorted(le.classes_) if artifacts_loaded else ["C1"],
-            help="City where the driver operates"
-        )
-        grade = st.selectbox(
-            "Grade",
-            [1, 2, 3, 4, 5],
-            index=0,
-            help="Driver grade level. Grade 1 = entry level"
-        )
-        joining_desig = st.selectbox(
-            "Joining Designation",
-            [1, 2, 3, 4, 5],
-            index=0,
-            help="Designation at the time of joining"
-        )
-
-    with c2:
-        # Real range: 10747 to 188418, mean 59334
-        income = st.number_input(
-            "Monthly Income (₹)",
-            min_value=10000, max_value=200000,
-            value=55000, step=1000,
-            help="Mean: ₹59,334 | Churned avg: ₹55,391"
-        )
-        # Real range: 1 to 2801, mean 417
-        tenure_days = st.number_input(
-            "Tenure Days",
-            min_value=1, max_value=3000,
-            value=173, step=30,
-            help="Median: 173 days | Active drivers avg: 566 days"
-        )
-        # Real range: 1 to 24, mean 8
-        months_active = st.number_input(
-            "Months Active",
-            min_value=1, max_value=24,
-            value=5, step=1,
-            help="Median: 5 months | Active drivers avg: 11 months"
-        )
-
-    st.markdown('<p class="section-label" style="margin-top:20px;">Performance Metrics</p>',
-                unsafe_allow_html=True)
-
-    c3, c4 = st.columns(2)
-    with c3:
-        # Real range: 1.0 to 4.0 (max is 4 not 5!)
+    st.markdown('<p class="section-label">📋 Driver Profile</p>', unsafe_allow_html=True)
+    
+    with st.container():
+        st.markdown('<div class="card-section">', unsafe_allow_html=True)
+        
+        # Demographics section
+        st.markdown('<p class="input-group-title">🏢 Basic Info</p>', unsafe_allow_html=True)
+        c1, c2 = st.columns(2)
+        with c1:
+            city = st.selectbox(
+                "City",
+                sorted(le.classes_) if artifacts_loaded else ["C1"],
+                help="City where the driver operates"
+            )
+        with c2:
+            grade = st.selectbox(
+                "Grade",
+                [1, 2, 3, 4, 5],
+                index=0,
+                help="Driver grade level (1=entry, 5=senior)"
+            )
+        
+        c1, c2 = st.columns(2)
+        with c1:
+            joining_desig = st.selectbox(
+                "Joining Designation",
+                [1, 2, 3, 4, 5],
+                index=0,
+                help="Designation at joining"
+            )
+        with c2:
+            months_active = st.number_input(
+                "Months Active",
+                min_value=1, max_value=24,
+                value=5, step=1,
+                help="Duration in months (median: 5)"
+            )
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        st.markdown('<div class="card-section">', unsafe_allow_html=True)
+        
+        # Financial section
+        st.markdown('<p class="input-group-title">💰 Financial Metrics</p>', unsafe_allow_html=True)
+        c1, c2 = st.columns(2)
+        with c1:
+            income = st.number_input(
+                "Monthly Income (₹)",
+                min_value=10000, max_value=200000,
+                value=55000, step=1000,
+                help="Mean: ₹59,334 | Churned avg: ₹55,391"
+            )
+        with c2:
+            total_bv = st.number_input(
+                "Total Business Value (₹)",
+                min_value=0, max_value=10000000,
+                value=817680, step=100000,
+                help="Median: ₹817,680 | Churned: ₹2.2M"
+            )
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        st.markdown('<div class="card-section">', unsafe_allow_html=True)
+        
+        # Activity section
+        st.markdown('<p class="input-group-title">📊 Activity & Tenure</p>', unsafe_allow_html=True)
+        c1, c2 = st.columns(2)
+        with c1:
+            tenure_days = st.number_input(
+                "Tenure Days",
+                min_value=1, max_value=3000,
+                value=173, step=30,
+                help="Median: 173 days"
+            )
+        with c2:
+            ever_low = st.selectbox(
+                "Ever Had Low Rating?",
+                ["Yes", "No"],
+                help="98% have had low rating"
+            )
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        st.markdown('<div class="card-section">', unsafe_allow_html=True)
+        
+        # Performance section
+        st.markdown('<p class="input-group-title">⭐ Performance Metrics</p>', unsafe_allow_html=True)
+        
+        st.markdown('<p style="font-size:0.82rem;color:#556B7D;margin-bottom:8px;"><strong>Avg Quarterly Rating</strong></p>', unsafe_allow_html=True)
         rating_mean = st.slider(
-            "Avg Quarterly Rating",
+            "Rating",
             min_value=1.0, max_value=4.0,
             value=1.0, step=0.1,
-            help="Real data range: 1.0–4.0 | Churned avg: 1.38 | Active avg: 1.96"
+            help="Real data range: 1.0–4.0",
+            label_visibility="collapsed"
         )
-        # Real range: -1.0 to 1.0 (not -4 to 4!)
+        
+        st.markdown('<p style="font-size:0.82rem;color:#556B7D;margin-bottom:8px;margin-top:16px;"><strong>Rating Change (mean)</strong></p>', unsafe_allow_html=True)
         rating_change = st.slider(
-            "Rating Change (mean)",
+            "Change",
             min_value=-1.0, max_value=1.0,
             value=0.0, step=0.05,
-            help="Mean change in rating over driver's history. Churned avg: -0.04"
+            help="Trend in driver ratings",
+            label_visibility="collapsed"
         )
+        
+        st.markdown('</div>', unsafe_allow_html=True)
 
-    with c4:
-        # Real range: 0 to 95,331,060 — log scale in model
-        total_bv = st.number_input(
-            "Total Business Value (₹)",
-            min_value=0, max_value=10000000,
-            value=817680, step=100000,
-            help="Median: ₹817,680 | Churned avg: ₹2.2M | Active avg: ₹9.6M"
-        )
-        ever_low = st.selectbox(
-            "Ever Had Low Rating?",
-            ["Yes", "No"],
-            help="98% of all drivers have had a low rating — less discriminating"
-        )
-
-    st.markdown("<div style='height:12px'></div>", unsafe_allow_html=True)
-    predict_btn = st.button("Predict Churn Probability", use_container_width=True)
+    st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
+    predict_btn = st.button("🎯  Predict Churn Risk", use_container_width=True)
 
 with right:
-    st.markdown('<p class="section-label">Prediction Result</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-label">📈 Prediction Result</p>', unsafe_allow_html=True)
 
     if predict_btn and artifacts_loaded:
         raw = {
@@ -262,126 +320,113 @@ with right:
         prob = preprocess_and_predict(raw, model, le, caps, feat_cols)
         pct  = round(prob * 100, 1)
 
-        # Risk thresholds based on real model distribution
-        # > 0.65 = High (295/477 test drivers)
-        # 0.40-0.65 = Medium (49/477)
-        # < 0.40 = Low (133/477)
         if prob >= 0.65:
             risk, css_cls = "High Risk", "result-high"
-            desc = "This driver is very likely to churn. Immediate retention action recommended."
+            emoji = "🚨"
+            desc = "Strong churn signal. Immediate retention action recommended."
         elif prob >= 0.40:
             risk, css_cls = "Medium Risk", "result-medium"
+            emoji = "⚠️"
             desc = "Watch closely. Consider targeted outreach and engagement."
         else:
             risk, css_cls = "Low Risk", "result-low"
-            desc = "This driver appears stable. Continue standard engagement practices."
+            emoji = "✅"
+            desc = "Stable driver. Continue standard engagement practices."
 
         st.markdown(f"""
         <div class="result-card {css_cls}">
+            <p style="font-size:2.2rem;margin:0 0 12px 0;">{emoji}</p>
             <p class="result-label">{risk}</p>
             <p class="result-prob">{pct}%</p>
             <p class="result-desc">{desc}</p>
         </div>
         """, unsafe_allow_html=True)
 
-        # Gauge
-        gc = "#FF4444" if prob >= 0.65 else ("#FFAA00" if prob >= 0.40 else "#00CC66")
+        # Gauge Chart
+        gc = "#E53935" if prob >= 0.65 else ("#F57C00" if prob >= 0.40 else "#1B8C5A")
         fig = go.Figure(go.Indicator(
             mode="gauge+number",
             value=pct,
-            number={'suffix':'%','font':{'color':gc,'size':26,'family':'DM Serif Display'}},
+            number={'suffix':'%','font':{'color':gc,'size':28,'family':'Sora','weight':'bold'}},
             gauge={
-                'axis':{'range':[0,100],'tickcolor':'#333',
-                        'tickfont':{'color':'#444','size':9}},
-                'bar':{'color':gc,'thickness':0.25},
-                'bgcolor':'#161616','borderwidth':0,
+                'axis':{'range':[0,100],'tickcolor':'#E8EEF5',
+                        'tickfont':{'color':'#7F8C9A','size':10}},
+                'bar':{'color':gc,'thickness':0.28},
+                'bgcolor':'#F3F5F7','borderwidth':0,
                 'steps':[
-                    {'range':[0,40],'color':'#0D1A12'},
-                    {'range':[40,65],'color':'#1A1200'},
-                    {'range':[65,100],'color':'#1A0505'},
+                    {'range':[0,40],'color':'#E8F5EA'},
+                    {'range':[40,65],'color':'#FFF8E1'},
+                    {'range':[65,100],'color':'#FFEBEE'},
                 ],
-                'threshold':{'line':{'color':gc,'width':3},'thickness':0.75,'value':pct}
+                'threshold':{'line':{'color':gc,'width':4},'thickness':0.8,'value':pct}
             }
         ))
         fig.update_layout(
-            height=200, margin=dict(t=16,b=0,l=16,r=16),
+            height=220, margin=dict(t=20,b=0,l=20,r=20),
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-            font={'color':'#666'}
+            font={'color':'#556B7D','family':'Poppins'}
         )
         st.plotly_chart(fig, use_container_width=True, config={'displayModeBar':False})
 
-        # Key signals — based on real data thresholds
-        st.markdown('<p class="section-label" style="margin-top:4px;">Key signals detected</p>',
-                    unsafe_allow_html=True)
+        # Key Signals
+        st.markdown('<p class="section-label" style="margin-top:8px;">🔍 Risk Signals</p>', unsafe_allow_html=True)
 
         signals = []
         if rating_change < 0:
-            signals.append("📉 Declining rating trend")
+            signals.append("📉 Declining ratings")
         elif rating_change > 0:
-            signals.append("📈 Improving rating trend")
+            signals.append("📈 Improving ratings")
         if tenure_days < 180:
-            signals.append("⏱ Early tenure — high risk window")
+            signals.append("⏱️ Early tenure")
         if grade == 1:
-            signals.append("🔰 Grade 1 — highest churn segment")
+            signals.append("🔰 Grade 1 driver")
         if ever_low == "Yes":
-            signals.append("⚠️ Has had low rating before")
+            signals.append("⚠️ Had low rating")
         if rating_mean <= 1.38:
-            signals.append("⭐ Below churned-driver avg rating (1.38)")
+            signals.append("⭐ Below avg rating")
         if months_active <= 6:
-            signals.append("📅 Low activity months")
+            signals.append("📅 Low activity")
         if total_bv < 817680:
-            signals.append("💼 Below median business value")
+            signals.append("💼 Low business")
         if income < 55391:
-            signals.append("💸 Below churned-driver avg income")
+            signals.append("💸 Low income")
         if not signals:
-            signals.append("✅ No major risk signals detected")
+            signals.append("✨ No major risks")
 
         pills = "".join([f'<span class="insight-pill">{s}</span>' for s in signals])
-        st.markdown(f'<div style="margin-top:4px">{pills}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="margin-top:8px">{pills}</div>', unsafe_allow_html=True)
 
+        # Metrics Footer
         st.markdown(f"""
         <div class="metric-row">
             <div class="metric-box">
                 <div class="metric-val">{pct}%</div>
-                <div class="metric-key">Churn Prob</div>
+                <div class="metric-key">Churn Risk</div>
             </div>
             <div class="metric-box">
-                <div class="metric-val">{risk.split()[0]}</div>
-                <div class="metric-key">Risk Level</div>
-            </div>
-            <div class="metric-box">
-                <div class="metric-val">0.9318</div>
+                <div class="metric-val">0.93</div>
                 <div class="metric-key">Model AUC</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-val">87%</div>
+                <div class="metric-key">Accuracy</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
     else:
         st.markdown("""
-        <div style="background:#0F0F0F;border:1px dashed #222;border-radius:16px;
-                    padding:56px 28px;text-align:center;margin-top:8px;">
-            <div style="font-size:2.2rem;margin-bottom:14px;">🎯</div>
-            <p style="color:#333;font-size:0.88rem;margin:0;line-height:1.8;">
+        <div style="background:#FFFFFF;border:2px dashed #E8EEF5;border-radius:20px;
+                    padding:64px 32px;text-align:center;margin-top:8px;
+                    box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+            <div style="font-size:3rem;margin-bottom:16px;animation:pulse 2s infinite;">🎯</div>
+            <p style="color:#7F8C9A;font-size:0.95rem;margin:0;line-height:1.8;font-weight:500;">
                 Fill in the driver details<br>
-                and click <strong style="color:#555">Predict</strong>
-                to see churn probability
+                and click <strong style="color:#0F1419;">Predict Churn Risk</strong><br>
+                <span style="font-size:0.85rem;color:#AAA;margin-top:8px;display:block;">
+                to see detailed risk assessment
+                </span>
             </p>
-        </div>
-        """, unsafe_allow_html=True)
-
-        # Show what High Risk looks like
-        st.markdown("""
-        <div style="margin-top:20px;">
-            <p class="section-label">High risk driver profile (reference)</p>
-            <div style="background:#1A0505;border:1px solid #FF3B3B22;border-radius:12px;
-                        padding:16px;font-size:0.8rem;color:#888;line-height:2;">
-                  City: C1, C4, C17, C20 (common)<br>
-                  Tenure Days: 100 – 500<br>
-                  Total Business Value: ₹0 – ₹100<br>
-                  Avg Quarterly Rating: 1.0<br>
-                  Months Active: 3 – 7<br>
-                  Grade: 1
-            </div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -389,8 +434,9 @@ with right:
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 st.markdown("""
 <div style="display:flex;justify-content:space-between;align-items:center;
-            padding:6px 0 20px;color:#2A2A2A;font-size:0.72rem;">
-    <span>Built with XGBoost · SMOTE · scikit-learn</span>
-    <span>Prashant · Ola Churn ML Project</span>
+            padding:12px 0 32px;color:#7F8C9A;font-size:0.76rem;">
+    <span style="font-weight:500;">🤖 AI-Powered Churn Prediction</span>
+    <span>Built with Random Forest · SMOTE · scikit-learn</span>
+    <span>Ola Churn ML Project</span>
 </div>
 """, unsafe_allow_html=True)
