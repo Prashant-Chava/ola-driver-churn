@@ -227,6 +227,7 @@ def predict_churn(input_df, model, le, caps, feat_cols):
         df['City_last'] = df['City_last'].apply(
             lambda x: le.transform([x])[0] if x in known else 0
         )
+        
     df = df.reindex(columns=feat_cols, fill_value=0)
     # Safely convert all columns to numeric, handling any remaining non-numeric values
     df = df.apply(pd.to_numeric, errors='coerce').fillna(0)
